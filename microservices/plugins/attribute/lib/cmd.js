@@ -2,7 +2,7 @@ var rek = require('rek'),
 
     // local modules
     validator = rek('microservices/plugins/attribute/validator/validator'),
-    attributeSchema = rek('microservices/plugins/attribute/schema/schema');
+    constraints = rek('microservices/plugins/attribute/constraints/constraints');
 
 var cmd = {
     addAttribute: function (msg, response) {
@@ -13,10 +13,7 @@ var cmd = {
         attribute = {};
         attribute.attribute_code = '';
 
-        const { isValid, errMsg } = validator(attribute, attributeSchema);
-
-        console.log(isValid);
-        console.log(errMsg);
+        const { isValid, errMsg } = Validator.validate(attribute, constraints);
         // if (!isValid) {
         //     response(null, {
         //         code: 1,
